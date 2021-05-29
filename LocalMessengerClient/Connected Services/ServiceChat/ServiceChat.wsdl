@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServiceChat" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IServiceChat_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://127.0.0.1:8898/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://127.0.0.1:8898/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://127.0.0.1:8898/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServiceChat_Connect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Connect" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_Connect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_Disconnect_InputMessage">
+    <wsdl:part name="parameters" element="tns:Disconnect" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_Disconnect_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_ListName_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListName" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_ListName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_SendMsg_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMsg" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_Authentication_InputMessage">
+    <wsdl:part name="parameters" element="tns:Authentication" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_Authentication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_OldMessege_InputMessage">
+    <wsdl:part name="parameters" element="tns:OldMessege" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_OldMessege_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OldMessegeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_GetPublicKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicKey" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_GetPublicKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPublicKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_GetPrivateKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateKey" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_GetPrivateKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrivateKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_MsgCallback_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MsgCallback" />
+  </wsdl:message>
+  <wsdl:message name="IServiceChat_ListUsersOnline_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ListUsersOnline" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceChat">
+    <wsdl:operation name="Connect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceChat/Connect" message="tns:IServiceChat_Connect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/ConnectResponse" message="tns:IServiceChat_Connect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceChat/Disconnect" message="tns:IServiceChat_Disconnect_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/DisconnectResponse" message="tns:IServiceChat_Disconnect_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceChat/ListName" message="tns:IServiceChat_ListName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/ListNameResponse" message="tns:IServiceChat_ListName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMsg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceChat/SendMsg" message="tns:IServiceChat_SendMsg_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Authentication">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceChat/Authentication" message="tns:IServiceChat_Authentication_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/AuthenticationResponse" message="tns:IServiceChat_Authentication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OldMessege">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceChat/OldMessege" message="tns:IServiceChat_OldMessege_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/OldMessegeResponse" message="tns:IServiceChat_OldMessege_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceChat/GetPublicKey" message="tns:IServiceChat_GetPublicKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/GetPublicKeyResponse" message="tns:IServiceChat_GetPublicKey_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateKey">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceChat/GetPrivateKey" message="tns:IServiceChat_GetPrivateKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/GetPrivateKeyResponse" message="tns:IServiceChat_GetPrivateKey_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MsgCallback">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/MsgCallback" message="tns:IServiceChat_MsgCallback_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListUsersOnline">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceChat/ListUsersOnline" message="tns:IServiceChat_ListUsersOnline_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IServiceChat" type="tns:IServiceChat">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServiceChat_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Connect">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/Connect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Disconnect">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/Disconnect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListName">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/ListName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMsg">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/SendMsg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Authentication">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/Authentication" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OldMessege">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/OldMessege" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPublicKey">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/GetPublicKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrivateKey">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/GetPrivateKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MsgCallback">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/MsgCallback" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListUsersOnline">
+      <soap12:operation soapAction="http://tempuri.org/IServiceChat/ListUsersOnline" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceChat">
+    <wsdl:port name="NetTcpBinding_IServiceChat" binding="tns:NetTcpBinding_IServiceChat">
+      <soap12:address location="net.tcp://127.0.0.1:8899/tcp" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://127.0.0.1:8899/tcp</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>MIRONOVPAVELPC\Mironov</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
